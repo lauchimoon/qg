@@ -16,7 +16,7 @@
 #define PI 3.1415926
 #define RAD2DEG (180 / PI)
 #define DEG2RAD (PI / 180)
-#define QG_VERSION  1.0
+#define QG_VERSION  1.1
 
 #if defined(_WIN32)
   #define QG_DEFAULT_FONT  "C:\\Windows\\Fonts\\arial.ttf"
