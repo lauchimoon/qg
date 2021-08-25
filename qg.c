@@ -210,6 +210,15 @@ int qg_screen_height() {
   return qg_data.window_height;
 }
 
+void qg_show_cursor() {
+  glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
+void qg_hide_cursor() {
+  glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+}
+
+
 bool qg_is_key_pressed(int key) {
   bool res;
 

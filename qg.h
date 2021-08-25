@@ -212,6 +212,8 @@ QGAPI void qg_take_screenshot(char *filename);
 QGAPI QGV2D qg_get_mouse_pos();
 QGAPI int qg_screen_width();
 QGAPI int qg_screen_height();
+QGAPI void qg_show_cursor();
+QGAPI void qg_hide_cursor();
 
 QGAPI bool qg_is_key_pressed(int key);
 QGAPI bool qg_is_key_down(int key);
