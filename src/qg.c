@@ -13,9 +13,6 @@
   void __stdcall Sleep(unsigned long msTimeout);  /* Include Sleep() function signature here to avoid including windows.h */
 #endif
 
-#define RLGL_IMPLEMENTATION
-#include "external/rlgl.h"
-
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "external/stb_image_write.h"
 
@@ -30,11 +27,6 @@
 
 #define MAX_BUFFERS   4
 #define BUFFER_LEN    1024
-
-#define FORMAT_UNCOMPRESSED_GRAYSCALE     1
-#define FORMAT_UNCOMPRESSED_GRAY_ALPHA    2
-#define FORMAT_UNCOMPRESSED_R8G8B8        4
-#define FORMAT_UNCOMPRESSED_R8G8B8A8      7
 
 typedef struct {
   GLFWwindow *handle;
@@ -57,20 +49,11 @@ typedef struct {
   QGFont default_font;
 } Data;
 
-/* Pixel data stored in the CPU */
-typedef struct Image {
-  void *data;
-  int width, height, mipmaps, format;
-} Image;
-
 static void error_callback(int error, const char *description);
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 static void init_device(int width, int height);
 static void wait(float ms);
 static void write_png(char *filename, unsigned char *img_data, int width, int height);
-static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size);
-static void free_img(Image img);
-static QGTexture load_texture_from_img(Image img);
 
 static Data qg_data = { 0 };
 
@@ -411,15 +394,6 @@ QGTexture qg_load_texture(char *path) {
   return t;
 }
 
-QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsigned int data_size) {
-  QGTexture t = { 0 };
-  Image dummy = load_img_from_memory(filetype, data, data_size);
-  t = load_texture_from_img(dummy);
-
-  free_img(dummy);
-  return t;
-}
-
 void qg_free_texture(QGTexture t) {
   glDeleteTextures(1, &t.id);
 
@@ -587,44 +561,3 @@ static void wait(float ms) {
 static void write_png(char *filename, unsigned char *img_data, int width, int height) {
   stbi_write_png(filename, width, height, 4, img_data, width*4);
 }
-
-static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size) {
-  Image image = { 0 };
-
-  if (data != NULL) {
-    int comp = 0;
-    image.data = stbi_load_from_memory(data, data_size, &image.width, &image.height, &comp, 0);
-
-    if (image.data != NULL) {
-      image.mipmaps = 1;
-
-      switch (comp) {
-      case 1: image.format = FORMAT_UNCOMPRESSED_GRAYSCALE; break;
-      case 2: image.format = FORMAT_UNCOMPRESSED_GRAY_ALPHA; break;
-      case 3: image.format = FORMAT_UNCOMPRESSED_R8G8B8; break;
-      case 4: image.format = FORMAT_UNCOMPRESSED_R8G8B8A8; break;
-      default: break;
-      }
-    }
-  }
-
-  return image;
-}
-
-static void free_img(Image img) {
-  free(img.data);
-}
-
-static QGTexture load_texture_from_img(Image img) {
-  QGTexture t = { 0 };
-
-  if ((img.data != NULL) && (img.width != 0) && (img.height != 0)) {
-    t.id = rlLoadTexture(img.data, img.width, img.height, img.format, img.mipmaps);
-  }
-
-  t.width = img.width;
-  t.height = img.height;
-
-  return t;
-}
-
