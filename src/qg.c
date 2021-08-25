@@ -355,6 +355,10 @@ float qg_get_fps() {
   return (1/(float)qg_data.time_target);
 }
 
+QGAPI float qg_get_delta() {
+  return (float)qg_data.time_frame;
+}
+
 
 
 QGTexture qg_load_texture(char *path) {

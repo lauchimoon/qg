@@ -234,6 +234,7 @@ QGAPI bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2);
 
 QGAPI void qg_set_fps(int fps);
 QGAPI float qg_get_fps();
+QGAPI float qg_get_delta();
 
 /* Textures */
 
