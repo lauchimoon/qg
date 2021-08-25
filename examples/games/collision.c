@@ -14,7 +14,7 @@ int main() {
   while (qg_window_is_open()) {
     rec_color = QG_BLACK;
     text = "Get to the rectangle below with WASD";
-    if (qgame_rects_collide(r1, r2)) {
+    if (qg_rec_vs_rec(r1, r2)) {
       rec_color = c;
       text = "Collision!";
     }

@@ -322,6 +322,28 @@ void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c) {
   glEnd();
 }
 
+bool qg_point_vs_rec(QGV2D point, QGRectangle rec) {
+  bool res = false;
+
+  if (point.x >= rec.x && point.x <= rec.x+rec.width &&
+      point.y >= rec.y && point.y <= rec.y+rec.height) {
+    res = true;
+  }
+
+  return res;
+}
+
+bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2) {
+  bool res = false;
+
+  if (rec1.x < rec2.x+rec2.width && rec1.x+rec1.width > rec2.x &&
+      rec1.y < rec2.y+rec2.height && rec1.y+rec1.height > rec2.y) {
+    res = true;
+  }
+
+  return res;
+}
+
 
 
 void qg_set_fps(int fps) {

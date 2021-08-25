@@ -21,8 +21,7 @@ typedef struct {
 #ifdef __cplusplus
 extern "C" {
 #endif
-int qgame_rects_collide(QGRectangle rec1, QGRectangle rec2);
-int qgame_circles_collide(QGCircle c1, QGCircle c2);
+bool qgame_circles_collide(QGCircle c1, QGCircle c2);
 
 QGameTileset *qgame_tileset_new(char *tileset_path, int t_width, int t_height);
 void qgame_tileset_free(QGameTileset *ts);
@@ -45,21 +44,9 @@ void qgame_tilemap_draw_grid(QGameTilemap *tm, QGColor c);
 }
 #endif
 
-#define QGAME_IMPLEMENTATION
-
 #if defined(QGAME_IMPLEMENTATION)
-int qgame_rects_collide(QGRectangle rec1, QGRectangle rec2) {
-  int c = false;
-  if (rec1.x < rec2.x + rec2.width && rec1.x + rec1.width > rec2.x &&
-      rec1.y < rec2.y + rec2.height && rec1.y + rec1.height > rec2.y) {
-        c = true;
-      }
-  
-  return c;
-}
-
-int qgame_circles_collide(QGCircle c1, QGCircle c2) {
-  int c = false;
+bool qgame_circles_collide(QGCircle c1, QGCircle c2) {
+  bool c = false;
   float dist_x = c1.center_x - c2.center_x;
   float dist_y = c1.center_y - c2.center_y;
   float dist = sqrt((dist_x+dist_x) * (dist_y+dist_y));
