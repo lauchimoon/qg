@@ -1,5 +1,4 @@
 /* qg: Quick Graphics
-   2D Graphics library based on OpenGL for Linux.
    Focused on simplicity, inspired by raylib.
 */
 #ifndef _QG_H
@@ -191,9 +190,20 @@ typedef int QGFont;
 #define MOUSE_RIGHT            1
 #define MOUSE_MID              2
 
-#define QG_WHITE    CLITERAL(QGColor){ 255, 255, 255, 255 }
-#define QG_BLACK    CLITERAL(QGColor){ 0, 0, 0, 255 }
-#define QG_RED      CLITERAL(QGColor){ 240, 50, 25, 255 }
+#define QG_WHITE           CLITERAL(QGColor){ 255, 255, 255, 255 }
+#define QG_BLACK           CLITERAL(QGColor){ 0, 0, 0, 255       }
+#define QG_DARKGRAY        CLITERAL(QGColor){ 68, 68, 68, 255 }
+#define QG_GRAY            CLITERAL(QGColor){ 128, 128, 128, 255 }
+#define QG_LIGHTGRAY       CLITERAL(QGColor){ 192, 192, 192, 255 }
+
+#define QG_RED             CLITERAL(QGColor){ 255, 50, 100, 255  }
+#define QG_ORANGE          CLITERAL(QGColor){ 255, 153, 51, 255  }
+#define QG_YELLOW          CLITERAL(QGColor){ 255, 201, 90, 255  }
+#define QG_GREEN           CLITERAL(QGColor){ 102, 255, 102, 255 }
+#define QG_BLUE            CLITERAL(QGColor){ 0, 128, 255, 255   }
+#define QG_PURPLE          CLITERAL(QGColor){ 178, 102, 255, 255 }
+#define QG_PINK            CLITERAL(QGColor){ 255, 204, 255, 255 }
+#define QG_MAGENTA         CLITERAL(QGColor){ 255, 102, 255, 255 }
 
 #if defined(__cplusplus)
 extern "C" {
