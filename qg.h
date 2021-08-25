@@ -5,12 +5,7 @@
 #ifndef _QG_H
 #define _QG_H
 
-#if defined(_WIN32)
-  #define QGAPI
-#else
-  #define QGAPI
-#endif
-
+#define QGAPI
 
 /* C and C++ have different ways of filling structures
    C structures are filled like (type){}
@@ -64,8 +59,7 @@ typedef struct {
 typedef int QGFont;
 
 #ifndef __cplusplus
-  #define false 0
-  #define true 1
+  #include <stdbool.h>
 #endif
 
 /* The unknown key */
@@ -208,7 +202,7 @@ extern "C" {
 
 QGAPI void qg_init_window(int width, int height, char *title);
 QGAPI void qg_close_window();
-QGAPI int qg_window_is_open();
+QGAPI bool qg_window_is_open();
 QGAPI void qg_begin_drawing();
 QGAPI void qg_stop_drawing();
 QGAPI void qg_clear(QGColor c);
@@ -216,10 +210,10 @@ QGAPI void qg_set_exit_key(int key);
 QGAPI int qg_random_int(int min, int max);
 QGAPI void qg_take_screenshot(char *filename);
 
-QGAPI int qg_is_key_pressed(int key);
-QGAPI int qg_is_key_down(int key);
-QGAPI int qg_is_mouse_pressed(int button);
-QGAPI int qg_is_mouse_down(int button);
+QGAPI bool qg_is_key_pressed(int key);
+QGAPI bool qg_is_key_down(int key);
+QGAPI bool qg_is_mouse_pressed(int button);
+QGAPI bool qg_is_mouse_down(int button);
 
 /* Shapes */
 
