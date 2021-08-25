@@ -1,6 +1,6 @@
 .PHONY: all, clean, install
 
-CC = gcc
+CC ?= gcc
 OBJS = qg.o \
 	   qglfw.o
 ROOT = $(shell whoami)

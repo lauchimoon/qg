@@ -55,8 +55,6 @@ static void init_device(int width, int height);
 static void wait(float ms);
 static void write_png(char *filename, unsigned char *img_data, int width, int height);
 
-static void update_buffers();
-
 static Data qg_data = { 0 };
 
 /* Create OpenGL context */
@@ -104,7 +102,7 @@ void qg_close_window() {
 }
 
 /* Repeat until exit_key is pressed */
-int qg_window_is_open() {
+bool qg_window_is_open() {
   return !glfwWindowShouldClose(qg_data.handle);
 }
 
@@ -196,52 +194,60 @@ void qg_take_screenshot(char *filename) {
   printf("[INFO]: Screenshot '%s' taken\n", buffer);
 }
 
+QGV2D qg_get_mouse_pos() {
+  double xpos, ypos;
+  glfwGetCursorPos(qg_data.handle, &xpos, &ypos);
 
-int qg_is_key_pressed(int key) {
-  int res;
+  QGV2D mouse = { (float)xpos, (float)ypos };
+  return mouse;
+}
+
+
+bool qg_is_key_pressed(int key) {
+  bool res;
 
   qg_data.current_key_state[key] = qg_is_key_down(key);
   if (qg_data.current_key_state[key] != qg_data.previous_key_state[key]) {
     if (qg_data.current_key_state[key]) {
-      res = 1;
+      res = true;
     }
     qg_data.previous_key_state[key] = qg_data.current_key_state[key];
   } else {
-    res = 0;
+    res = false;
   }
 
   return res;
 }
 
-int qg_is_key_down(int key) {
+bool qg_is_key_down(int key) {
   if (glfwGetKey(qg_data.handle, key) == GLFW_PRESS) {
-    return 1;
+    return true;
   } else {
-    return 0;
+    return false;
   }
 }
 
-int qg_is_mouse_pressed(int button) {
-  int res;
+bool qg_is_mouse_pressed(int button) {
+  bool res;
 
   qg_data.current_mouse_state[button] = qg_is_mouse_down(button);
   if (qg_data.current_mouse_state[button] != qg_data.previous_mouse_state[button]) {
     if (qg_data.current_mouse_state[button]) {
-      res = 1;
+      res = true;
     }
     qg_data.previous_mouse_state[button] = qg_data.current_mouse_state[button];
   } else {
-    res = 0;
+    res = false;
   }
 
   return res;
 }
 
-int qg_is_mouse_down(int button) {
+bool qg_is_mouse_down(int button) {
   if (glfwGetMouseButton(qg_data.handle, button) == GLFW_PRESS) {
-    return 1;
+    return true;
   } else {
-    return 0;
+    return false;
   }
 }
 
