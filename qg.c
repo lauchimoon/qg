@@ -202,6 +202,13 @@ QGV2D qg_get_mouse_pos() {
   return mouse;
 }
 
+int qg_screen_width() {
+  return qg_data.window_width;
+}
+
+int qg_screen_height() {
+  return qg_data.window_height;
+}
 
 bool qg_is_key_pressed(int key) {
   bool res;
