@@ -73,7 +73,9 @@ static Data qg_data = { 0 };
 void qg_init_window(int width, int height, char *title) {
   glfwSetErrorCallback(error_callback);
   if (!glfwInit()) {
+#if !defined(QG_NO_LOG)
     printf("[GLFW]: failed to init\n");
+#endif
   }
 
   glfwWindowHint(GLFW_RESIZABLE, 0);
@@ -85,7 +87,9 @@ void qg_init_window(int width, int height, char *title) {
   qg_data.window_title = title;
 
   if (qg_data.handle == NULL) {
+#if !defined(QG_NO_LOG)
     printf("[GLFW]: failed to init window\n");
+#endif
     glfwTerminate();
   }
 
@@ -99,8 +103,10 @@ void qg_init_window(int width, int height, char *title) {
   srand(time(NULL));  /* Seed random number generator */
   qg_data.time_previous = glfwGetTime();
 
+#if !defined(QG_NO_LOG)
   printf("[INFO]: Starting QG v%.1f\n", QG_VERSION);
   printf("[INFO]: Window size of %dx%d\n", qg_data.window_width, qg_data.window_height);
+#endif
 }
 
 /* Free OpenGL window and close context */
@@ -110,7 +116,9 @@ void qg_close_window() {
   glfwDestroyWindow(qg_data.handle);
   glfwTerminate();
 
+#if !defined(QG_NO_LOG)
   printf("[INFO]: Closing QG\n");
+#endif
 }
 
 /* Repeat until exit_key is pressed */
@@ -203,7 +211,9 @@ void qg_take_screenshot(char *filename) {
 
   write_png(buffer, img_data_flip, fb_w, fb_h);
   free(img_data_flip);
+#if !defined(QG_NO_LOG)
   printf("[INFO]: Screenshot '%s' taken\n", buffer);
+#endif
 }
 
 QGV2D qg_get_mouse_pos() {
@@ -360,7 +370,9 @@ bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2) {
 
 void qg_set_fps(int fps) {
   qg_data.time_target = 1 / (float)fps;
+#if !defined(QG_NO_LOG)
   printf("[INFO]: Screen refreshes every %f seconds\n", qg_data.time_target);
+#endif
 }
 
 float qg_get_fps() {
@@ -381,9 +393,9 @@ QGTexture qg_load_texture(char *path) {
   unsigned char *data = stbi_load(path, &width, &height, &bpp, 4);
 
   if (data == NULL) {
+#if !defined(QG_NO_LOG)
     printf("[WARNING]: Failed to load file %s\n", path);
-  } else {
-    printf("[FILE]: Loaded texture [PATH: %s]\n", path);
+#endif
   }
   
   GLuint id;
@@ -402,6 +414,9 @@ QGTexture qg_load_texture(char *path) {
   t.id = id;
   t.width = width;
   t.height = height;
+#if !defined(QG_NO_LOG)
+  printf("[INFO]: Loaded texture [ID: %d]\n", t.id);
+#endif
 
   return t;
 }
@@ -419,7 +434,9 @@ void qg_free_texture(QGTexture t) {
   glDeleteTextures(1, &t.id);
 
   if (t.id != 0) {
+#if !defined(QG_NO_LOG)
     printf("[INFO]: Unloaded texture [ID: %d]\n", t.id);
+#endif
   }
 }
 
@@ -483,7 +500,9 @@ QGFont qg_load_font(char *path) {
   QGFont fn = fonsAddFont(qg_data.fs, "font", path);
 
   if (fn == FONS_INVALID) {
+#if !defined(QG_NO_LOG)
     printf("[FONTSTASH]: Could not load font %s\n", path);
+#endif
   }
 
   return fn;
@@ -557,7 +576,9 @@ static void init_device(int width, int height) {
 
   qg_data.fs = glfonsCreate(512, 512, FONS_ZERO_TOPLEFT);
   if (qg_data.fs == NULL) {
+#if !defined(QG_NO_LOG)
     printf("[FONTSTASH]: Could not create fontstash instance\n");
+#endif
   }
 
   qg_data.default_font = qg_load_font(QG_DEFAULT_FONT);
