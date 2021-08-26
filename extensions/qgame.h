@@ -24,6 +24,7 @@ extern "C" {
 bool qgame_circles_collide(QGCircle c1, QGCircle c2);
 
 QGameTileset *qgame_tileset_new(char *tileset_path, int t_width, int t_height);
+QGameTileset *qgame_tileset_new_from_texture(QGTexture texture, int t_width, int t_height);
 void qgame_tileset_free(QGameTileset *ts);
 void qgame_tileset_set_size(QGameTileset *ts, int t_width, int t_height);
 void qgame_tileset_draw_tile(QGameTileset *ts, int id, int x, int y);
@@ -62,6 +63,15 @@ QGameTileset *qgame_tileset_new(char *tileset_path, int t_width, int t_height) {
   QGameTileset *ts = malloc(sizeof(QGameTileset));
   *ts = (QGameTileset){ 0 };
   ts->tex = qg_load_texture(tileset_path);
+  qgame_tileset_set_size(ts, t_width, t_height);
+
+  return ts;
+}
+
+QGameTileset *qgame_tileset_new_from_texture(QGTexture texture, int t_width, int t_height) {
+  QGameTileset *ts = malloc(sizeof(QGameTileset));
+  *ts = (QGameTileset){ 0 };
+  ts->tex = texture;
   qgame_tileset_set_size(ts, t_width, t_height);
 
   return ts;
