@@ -365,6 +365,22 @@ void qg_draw_rectangle(int x, int y, int w, int h, QGColor c)
   glEnd();
 }
 
+void qg_draw_rectangle_rec(QGRectangle rec, QGColor c)
+{
+  qg_draw_rectangle(rec.x, rec.y, rec.width, rec.height, c);
+}
+
+void qg_draw_rectangle_lines(QGRectangle rec, QGColor c)
+{
+  glBegin(GL_LINE_LOOP);
+    glColor4ub(c.r, c.g, c.b, c.a);
+    glVertex2i(x, y);
+    glVertex2i(x + w-1, y);
+    glVertex2i(x + w-1, y + h-1);
+    glVertex2i(x, y + h-1);
+  glEnd();
+}
+
 /* Draw a filled circle */
 void qg_draw_circle(int cx, int cy, float r, QGColor c)
 {
