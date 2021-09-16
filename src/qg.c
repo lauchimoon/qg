@@ -64,6 +64,7 @@ typedef struct {
 
 static void error_callback(int error, const char *description);
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+static void char_callback(GLFWwindow *window, unsigned int key);
 static void init_device(int width, int height);
 static void wait(float ms);
 static void write_png(char *filename, unsigned char *img_data, int width, int height);
@@ -100,6 +101,7 @@ void qg_init_window(int width, int height, char *title)
 
   glfwMakeContextCurrent(qg_data.handle);
   glfwSetKeyCallback(qg_data.handle, key_callback);
+  glfwSetCharCallback(qg_data.handle, char_callback);
   glfwSwapInterval(0);  /* Disables vsync */
   qg_data.exit_key = GLFW_KEY_ESCAPE;
 
@@ -641,6 +643,15 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 {
   if (action == GLFW_PRESS && key == qg_data.exit_key) {
     glfwSetWindowShouldClose(qg_data.handle, 1);
+  }
+}
+
+static void char_callback(GLFWwindow *window, unsigned int key)
+{
+  if (qg_data.char_pressed_queue_count < MAX_CHAR_PRESSED_QUEUE) {
+    // Add character to the queue
+    qg_data.char_pressed_queue[qg_data.char_pressed_queue_count] = key;
+    qg_data.char_pressed_queue_count++;
   }
 }
 
