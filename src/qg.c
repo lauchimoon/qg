@@ -74,7 +74,8 @@ QGTexture load_texture_from_img(Image img);
 static Data qg_data = { 0 };
 
 /* Create OpenGL context */
-void qg_init_window(int width, int height, char *title) {
+void qg_init_window(int width, int height, char *title)
+{
   glfwSetErrorCallback(error_callback);
   if (!glfwInit()) {
 #if !defined(QG_NO_LOG)
@@ -114,7 +115,8 @@ void qg_init_window(int width, int height, char *title) {
 }
 
 /* Free OpenGL window and close context */
-void qg_close_window() {
+void qg_close_window()
+{
   glfonsDelete(qg_data.fs);
 
   glfwDestroyWindow(qg_data.handle);
@@ -126,11 +128,13 @@ void qg_close_window() {
 }
 
 /* Repeat until exit_key is pressed */
-bool qg_window_is_open() {
+bool qg_window_is_open()
+{
   return !glfwWindowShouldClose(qg_data.handle);
 }
 
-void qg_begin_drawing() {
+void qg_begin_drawing()
+{
   qg_data.time_current = glfwGetTime();
   qg_data.time_update = qg_data.time_current - qg_data.time_previous;
   qg_data.time_previous = qg_data.time_current;
@@ -140,7 +144,8 @@ void qg_begin_drawing() {
 }
 
 /* Swap buffers */
-void qg_stop_drawing() {
+void qg_stop_drawing()
+{
   glfwSwapBuffers(qg_data.handle);
   glfwPollEvents();
   glFlush();
@@ -166,7 +171,8 @@ void qg_stop_drawing() {
 }
 
 /* Clear the background's color */
-void qg_clear(QGColor c) {
+void qg_clear(QGColor c)
+{
   /* Transforming values from 0-1 to 0-255 */
   float r = (float)c.r / 255;
   float g = (float)c.g / 255;
@@ -176,11 +182,13 @@ void qg_clear(QGColor c) {
   glClearColor(r, g, b, a);
 }
 
-void qg_set_exit_key(int key) {
+void qg_set_exit_key(int key)
+{
   qg_data.exit_key = key;
 }
 
-int qg_random_int(int min, int max) {
+int qg_random_int(int min, int max)
+{
   if (min > max) {
     int tmp = max;
     max = min;
@@ -190,7 +198,8 @@ int qg_random_int(int min, int max) {
 }
 
 /* Note: no extension (.png) required in argument filename */
-void qg_take_screenshot(char *filename) {
+void qg_take_screenshot(char *filename)
+{
   char buffer[20];
   int fb_w, fb_h;
   unsigned char *img_data;
@@ -220,7 +229,8 @@ void qg_take_screenshot(char *filename) {
 #endif
 }
 
-QGV2D qg_get_mouse_pos() {
+QGV2D qg_get_mouse_pos()
+{
   double xpos, ypos;
   glfwGetCursorPos(qg_data.handle, &xpos, &ypos);
 
@@ -228,24 +238,29 @@ QGV2D qg_get_mouse_pos() {
   return mouse;
 }
 
-int qg_screen_width() {
+int qg_screen_width()
+{
   return qg_data.window_width;
 }
 
-int qg_screen_height() {
+int qg_screen_height()
+{
   return qg_data.window_height;
 }
 
-void qg_show_cursor() {
+void qg_show_cursor()
+{
   glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
-void qg_hide_cursor() {
+void qg_hide_cursor()
+{
   glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 }
 
 
-bool qg_is_key_pressed(int key) {
+bool qg_is_key_pressed(int key)
+{
   bool res;
 
   qg_data.current_key_state[key] = qg_is_key_down(key);
@@ -261,7 +276,8 @@ bool qg_is_key_pressed(int key) {
   return res;
 }
 
-bool qg_is_key_down(int key) {
+bool qg_is_key_down(int key)
+{
   if (glfwGetKey(qg_data.handle, key) == GLFW_PRESS) {
     return true;
   } else {
@@ -269,7 +285,8 @@ bool qg_is_key_down(int key) {
   }
 }
 
-bool qg_is_mouse_pressed(int button) {
+bool qg_is_mouse_pressed(int button)
+{
   bool res;
 
   qg_data.current_mouse_state[button] = qg_is_mouse_down(button);
@@ -285,7 +302,8 @@ bool qg_is_mouse_pressed(int button) {
   return res;
 }
 
-bool qg_is_mouse_down(int button) {
+bool qg_is_mouse_down(int button)
+{
   if (glfwGetMouseButton(qg_data.handle, button) == GLFW_PRESS) {
     return true;
   } else {
@@ -293,7 +311,8 @@ bool qg_is_mouse_down(int button) {
   }
 }
 
-int qg_get_char_pressed() {
+int qg_get_char_pressed()
+{
   int value = 0;
 
   if (qg_data.char_pressed_queue_count > 0) {
@@ -301,8 +320,9 @@ int qg_get_char_pressed() {
     value = qg_data.char_pressed_queue[0];
 
     // Shift elements 1 step toward the head
-    for (int i = 0; i < (qg_data.char_pressed_queue_count - 1); i++)
+    for (int i = 0; i < (qg_data.char_pressed_queue_count - 1); i++) {
       qg_data.char_pressed_queue[i] = qg_data.char_pressed_queue[i + 1];
+    }
 
     // Reset last character in queue
     qg_data.char_pressed_queue[qg_data.char_pressed_queue_count] = 0;
@@ -315,7 +335,8 @@ int qg_get_char_pressed() {
 
 
 /* Draw a pixel */
-void qg_draw_point(int x, int y, QGColor c) {
+void qg_draw_point(int x, int y, QGColor c)
+{
   glBegin(GL_POINTS);
     glColor4ub(c.r, c.g, c.b, c.a);
     glVertex2i(x, y);
@@ -323,7 +344,8 @@ void qg_draw_point(int x, int y, QGColor c) {
 }
 
 /* Draw a line */
-void qg_draw_line(int sx, int sy, int ex, int ey, QGColor c) {
+void qg_draw_line(int sx, int sy, int ex, int ey, QGColor c)
+{
   glBegin(GL_LINES);
     glColor4ub(c.r, c.g, c.b, c.a);
     glVertex2i(sx, sy);
@@ -332,7 +354,8 @@ void qg_draw_line(int sx, int sy, int ex, int ey, QGColor c) {
 }
 
 /* Draw a filled rectangle */
-void qg_draw_rectangle(int x, int y, int w, int h, QGColor c) {
+void qg_draw_rectangle(int x, int y, int w, int h, QGColor c)
+{
   glBegin(GL_QUADS);
     glColor4ub(c.r, c.g, c.b, c.a);
     glVertex2i(x, y);
@@ -343,7 +366,8 @@ void qg_draw_rectangle(int x, int y, int w, int h, QGColor c) {
 }
 
 /* Draw a filled circle */
-void qg_draw_circle(int cx, int cy, float r, QGColor c) {
+void qg_draw_circle(int cx, int cy, float r, QGColor c)
+{
   if (r <= 0) {
     r = 0.1;
   }
@@ -358,7 +382,8 @@ void qg_draw_circle(int cx, int cy, float r, QGColor c) {
 }
 
 /* Draw a filled triangle */
-void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c) {
+void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c)
+{
   glBegin(GL_TRIANGLES);
     glColor4ub(c.r, c.g, c.b, c.a);
     glVertex2f(v1.x, v1.y);
@@ -367,7 +392,8 @@ void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c) {
   glEnd();
 }
 
-bool qg_point_vs_rec(QGV2D point, QGRectangle rec) {
+bool qg_point_vs_rec(QGV2D point, QGRectangle rec)
+{
   bool res = false;
 
   if (point.x >= rec.x && point.x <= rec.x+rec.width &&
@@ -378,7 +404,8 @@ bool qg_point_vs_rec(QGV2D point, QGRectangle rec) {
   return res;
 }
 
-bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2) {
+bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2)
+{
   bool res = false;
 
   if (rec1.x < rec2.x+rec2.width && rec1.x+rec1.width > rec2.x &&
@@ -391,24 +418,28 @@ bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2) {
 
 
 
-void qg_set_fps(int fps) {
+void qg_set_fps(int fps)
+{
   qg_data.time_target = 1 / (float)fps;
 #if !defined(QG_NO_LOG)
   printf("[INFO]: Screen refreshes every %f seconds\n", qg_data.time_target);
 #endif
 }
 
-float qg_get_fps() {
+float qg_get_fps()
+{
   return (1/(float)qg_data.time_target);
 }
 
-QGAPI float qg_get_delta() {
+float qg_get_delta()
+{
   return (float)qg_data.time_frame;
 }
 
 
 
-QGTexture qg_load_texture(char *path) {
+QGTexture qg_load_texture(char *path)
+{
   QGTexture t;
 
   int width, height, bpp;
@@ -444,7 +475,8 @@ QGTexture qg_load_texture(char *path) {
   return t;
 }
 
-QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsigned int data_size) {
+QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsigned int data_size)
+{
   QGTexture t = { 0 };
   Image dummy = load_img_from_memory(filetype, data, data_size);
   t = load_texture_from_img(dummy);
@@ -453,7 +485,8 @@ QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsig
   return t;
 }
 
-void qg_free_texture(QGTexture t) {
+void qg_free_texture(QGTexture t)
+{
   glDeleteTextures(1, &t.id);
 
   if (t.id != 0) {
@@ -463,11 +496,13 @@ void qg_free_texture(QGTexture t) {
   }
 }
 
-void qg_draw_texture(QGTexture t, int x, int y, QGColor tint) {
+void qg_draw_texture(QGTexture t, int x, int y, QGColor tint)
+{
   qg_draw_texture_ex(t, (QGV2D){ x, y }, 1.0, 0.0, tint);
 }
 
-void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor tint) {
+void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor tint)
+{
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, t.id);
 
@@ -489,7 +524,8 @@ void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor 
   glDisable(GL_TEXTURE_2D);
 }
 
-void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGV2D pos, QGColor tint) {
+void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGV2D pos, QGColor tint)
+{
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, t.id);
 
@@ -519,7 +555,8 @@ void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGV2D pos, QGColor tint)
 
 
 
-QGFont qg_load_font(char *path) {
+QGFont qg_load_font(char *path)
+{
   QGFont fn = fonsAddFont(qg_data.fs, "font", path);
 
   if (fn == FONS_INVALID) {
@@ -531,13 +568,14 @@ QGFont qg_load_font(char *path) {
   return fn;
 }
 
-/* By default it uses /usr/share/fonts/ubuntu/UbuntuMono-R.ttf */
-void qg_draw_text(char *text, int x, int y, int font_size, QGColor c) {
+void qg_draw_text(char *text, int x, int y, int font_size, QGColor c)
+{
   qg_draw_text_ex(qg_data.default_font, text, x, y, font_size, c);
 }
 
 /* If a font was loaded, the user may use it in this function */
-void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColor c) {
+void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColor c)
+{
   unsigned int color = glfonsRGBA(c.r, c.g, c.b, c.a);
 
   fonsClearState(qg_data.fs);
@@ -548,7 +586,8 @@ void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColo
   fonsDrawText(qg_data.fs, (float)x, (float)y+font_size-6, text, NULL);
 }
 
-char *qg_text_format(char *text, ...) {
+char *qg_text_format(char *text, ...)
+{
   char buffers[MAX_BUFFERS][BUFFER_LEN] = { 0 };
   int index = 0;
 
@@ -568,26 +607,30 @@ char *qg_text_format(char *text, ...) {
   return current_buffer;
 }
 
-void qg_draw_fps(int x, int y, QGColor c) {
+void qg_draw_fps(int x, int y, QGColor c)
+{
   qg_draw_text(qg_text_format("%.0f fps", qg_get_fps()), x, y, 40, c);
 }
 
 
 
 /* Redirect errors to here */
-static void error_callback(int error, const char *description) {
+static void error_callback(int error, const char *description)
+{
   printf(description);
 }
 
 /* Specific keyboard events */
-static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
   if (action == GLFW_PRESS && key == qg_data.exit_key) {
     glfwSetWindowShouldClose(qg_data.handle, 1);
   }
 }
 
 /* OpenGL setup */
-static void init_device(int width, int height) {
+static void init_device(int width, int height)
+{
   glfwGetFramebufferSize(qg_data.handle, &width, &height);
   glViewport(0, 0, width, height);
 
@@ -614,7 +657,8 @@ static void init_device(int width, int height) {
   glLoadIdentity();
 }
 
-static void wait(float ms) {
+static void wait(float ms)
+{
 #if defined(_WIN32)
   Sleep((unsigned int)ms);
 #elif defined(__linux__)
@@ -623,11 +667,13 @@ static void wait(float ms) {
 #endif
 }
 
-static void write_png(char *filename, unsigned char *img_data, int width, int height) {
+static void write_png(char *filename, unsigned char *img_data, int width, int height)
+{
   stbi_write_png(filename, width, height, 4, img_data, width*4);
 }
 
-static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size) {
+static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size)
+{
   Image image = { 0 };
 
   if (data != NULL) {
@@ -650,11 +696,13 @@ static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned 
   return image;
 }
 
-static void free_img(Image img) {
+static void free_img(Image img)
+{
   free(img.data);
 }
 
-QGTexture load_texture_from_img(Image img) {
+QGTexture load_texture_from_img(Image img)
+{
   QGTexture t;
 
   GLuint id;
