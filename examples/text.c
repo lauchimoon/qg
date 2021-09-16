@@ -2,7 +2,8 @@
 
 #define NULL  ((void *)0)
 
-int main() {
+int main()
+{
   qg_init_window(800, 800, "[qg] text");
   qg_set_fps(60);
   QGColor c = { 128, 255, 128, 255 };

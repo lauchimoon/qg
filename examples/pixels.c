@@ -1,6 +1,7 @@
 #include "qg.h"
 
-int main() {
+int main()
+{
   qg_init_window(800, 800, "[qg] pixels");
 
   while (qg_window_is_open()) {

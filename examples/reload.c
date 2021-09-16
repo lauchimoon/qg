@@ -4,8 +4,9 @@ void reload();
 
 QGTexture t = { 0 };
 
-int main() {
-  qg_init_window(800, 800, "[qg] reloading");
+int main()
+{
+  qg_init_window(800, 800, "[qg] texture reloading");
   qg_set_fps(60);
   t = qg_load_texture("logo.png");
 
