@@ -374,10 +374,10 @@ void qg_draw_rectangle_lines(QGRectangle rec, QGColor c)
 {
   glBegin(GL_LINE_LOOP);
     glColor4ub(c.r, c.g, c.b, c.a);
-    glVertex2i(x, y);
-    glVertex2i(x + w-1, y);
-    glVertex2i(x + w-1, y + h-1);
-    glVertex2i(x, y + h-1);
+    glVertex2i(rec.x, rec.y);
+    glVertex2i(rec.x + rec.width-1, rec.y);
+    glVertex2i(rec.x + rec.width-1, rec.y + rec.height-1);
+    glVertex2i(rec.x, rec.y + rec.height-1);
   glEnd();
 }
 
