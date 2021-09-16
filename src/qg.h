@@ -248,7 +248,7 @@ QGAPI float qg_get_delta();
 /* Textures */
 
 QGAPI QGTexture qg_load_texture(char *path);
-QGAPI QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsigned int data_size);
+QGAPI QGTexture qg_load_texture_from_header(char *filetype, unsigned char *data, unsigned int data_size);
 QGAPI void qg_free_texture(QGTexture t);
 QGAPI void qg_draw_texture(QGTexture t, int x, int y, QGColor tint);
 QGAPI void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor tint);

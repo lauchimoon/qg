@@ -475,7 +475,7 @@ QGTexture qg_load_texture(char *path)
   return t;
 }
 
-QGTexture qg_load_texture_from_memory(char *filetype, unsigned char *data, unsigned int data_size)
+QGTexture qg_load_texture_from_header(char *filetype, unsigned char *data, unsigned int data_size)
 {
   QGTexture t = { 0 };
   Image dummy = load_img_from_memory(filetype, data, data_size);
