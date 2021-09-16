@@ -27,6 +27,7 @@
 
 #define MAX_BUFFERS   4
 #define BUFFER_LEN    1024
+#define MAX_CHAR_PRESSED_QUEUE  16
 #define FORMAT_UNCOMPRESSED_GRAYSCALE     1
 #define FORMAT_UNCOMPRESSED_GRAY_ALPHA    2
 #define FORMAT_UNCOMPRESSED_R8G8B8        4
@@ -48,6 +49,9 @@ typedef struct {
   int previous_key_state[512];
   int current_mouse_state[3];
   int previous_mouse_state[3];
+
+  int char_pressed_queue[MAX_CHAR_PRESSED_QUEUE];
+  int char_pressed_queue_count;
 
   FONScontext *fs;
   QGFont default_font;
@@ -287,6 +291,25 @@ bool qg_is_mouse_down(int button) {
   } else {
     return false;
   }
+}
+
+int qg_get_char_pressed() {
+  int value = 0;
+
+  if (qg_data.char_pressed_queue_count > 0) {
+    // Get character
+    value = qg_data.char_pressed_queue[0];
+
+    // Shift elements 1 step toward the head
+    for (int i = 0; i < (qg_data.char_pressed_queue_count - 1); i++)
+      qg_data.char_pressed_queue[i] = qg_data.char_pressed_queue[i + 1];
+
+    // Reset last character in queue
+    qg_data.char_pressed_queue[qg_data.char_pressed_queue_count] = 0;
+    qg_data.char_pressed_queue_count--;
+  }
+
+  return value;
 }
 
 

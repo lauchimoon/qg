@@ -227,6 +227,7 @@ QGAPI bool qg_is_key_pressed(int key);
 QGAPI bool qg_is_key_down(int key);
 QGAPI bool qg_is_mouse_pressed(int button);
 QGAPI bool qg_is_mouse_down(int button);
+QGAPI int qg_get_char_pressed();
 
 /* Shapes */
 
