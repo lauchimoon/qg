@@ -61,7 +61,8 @@ Player p;
 int current_screen = SCREEN_TITLE;
 int w, h;
 
-int main() {
+int main()
+{
   w = MAP_WIDTH*TILE_SIZE;
   h = MAP_HEIGHT*TILE_SIZE;
   qg_init_window(w, h, "maze - qgame");
@@ -83,7 +84,8 @@ int main() {
   return 0;
 }
 
-void init_resources() {
+void init_resources()
+{
   ts = qgame_tileset_new("res/tileset.png", TILE_SIZE, TILE_SIZE);
   tm = qgame_tilemap_new();
   tm->ts = ts;
@@ -97,27 +99,30 @@ void init_resources() {
   fog = qg_load_texture("res/fog.png");
 }
 
-void deinit_resources() {
+void deinit_resources()
+{
   qgame_tileset_free(ts);
   qgame_tilemap_free(tm);
   qg_free_texture(p.t);
   qg_free_texture(fog);
 }
 
-void init_screen(int s) {
+void init_screen(int s)
+{
   switch (s) {
   case SCREEN_TITLE: case SCREEN_END:
-    p.pos = (QGV2D){ (w/2)/2 + 50, (h/2)/2 };
+    p.pos = (QGVec2){ (w/2)/2 + 50, (h/2)/2 };
     break;
   case SCREEN_GAME:
-    p.pos = (QGV2D){ 0+32, 0+32*9 };
+    p.pos = (QGVec2){ 0+32, 0+32*9 };
     break;
   default:
     break;
   }
 }
 
-void update_screen(int s) {
+void update_screen(int s)
+{
   switch (s) {
   case SCREEN_TITLE:
     if (qg_is_key_pressed(KEY_SPACE)) {
@@ -137,7 +142,8 @@ void update_screen(int s) {
   }
 }
 
-void draw_screen(int s) {
+void draw_screen(int s)
+{
   switch (s) {
   case SCREEN_TITLE:
     qg_draw_text_ex(fnt, "ESCAPE THE MAZE", 45, 30, 40, QG_WHITE);
@@ -165,7 +171,8 @@ void draw_screen(int s) {
 
 
 /* Check for collisions, movement, etc */
-void update_player() {
+void update_player()
+{
   int p_tile_x = p.pos.x / TILE_SIZE;
   int p_tile_y = p.pos.y / TILE_SIZE;
   int rule_north = qgame_tilemap_get_tile(tm, p_tile_x, p_tile_y-1) != 1;
@@ -197,3 +204,4 @@ void update_player() {
     init_screen(SCREEN_END);
   }
 }
+
