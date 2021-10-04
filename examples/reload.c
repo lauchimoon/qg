@@ -19,7 +19,7 @@ int main()
     qg_clear(QG_WHITE);
     qg_draw_texture(t, 0, 0, QG_WHITE);
     qg_draw_text("Modify the texture 'logo.png' and press r to see the changes!", 10, 10, 24, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_free_texture(t);

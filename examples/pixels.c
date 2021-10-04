@@ -13,7 +13,7 @@ int main()
         qg_draw_point(x, y, c);
       }
     }
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

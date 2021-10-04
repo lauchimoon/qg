@@ -9,7 +9,7 @@ int main()
     qg_begin_drawing();
     qg_draw_texture(t, 0, 0, QG_WHITE);
     qg_draw_text("This is a texture!", 10, 10, 30, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_free_texture(t);

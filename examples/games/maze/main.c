@@ -18,7 +18,7 @@ enum {
 };
 
 typedef struct {
-  QGV2D pos;
+  QGVec2 pos;
   QGTexture t;
 } Player;
 
@@ -56,7 +56,7 @@ QGameTileset *ts;
 QGameTilemap *tm;
 QGTexture fog;
 QGFont fnt;
-QGV2D fog_pos;
+QGVec2 fog_pos;
 Player p;
 int current_screen = SCREEN_TITLE;
 int w, h;
@@ -75,7 +75,7 @@ int main() {
     qg_begin_drawing();
     qg_clear(QG_BLACK);
     draw_screen(current_screen);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   deinit_resources();

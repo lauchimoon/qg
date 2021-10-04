@@ -146,7 +146,7 @@ void qg_begin_drawing(void)
 }
 
 /* Swap buffers */
-void qg_stop_drawing(void)
+void qg_end_drawing(void)
 {
   glfwSwapBuffers(qg_data.handle);
   glfwPollEvents();

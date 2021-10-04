@@ -22,7 +22,7 @@ int main()
     qg_clear(QG_WHITE);
     qg_draw_texture_part(t, r, (QGVec2){ 800/2-t.width/2, 800/2-t.height/2 }, QG_WHITE);
     qg_draw_text("Animations are done via rectangles. Check the source code!", 10, 10, 20, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_free_texture(t);

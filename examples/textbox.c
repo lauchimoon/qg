@@ -49,7 +49,7 @@ int main() {
     qg_draw_rectangle_lines(rec, mouse_on_text? QG_RED : QG_BLACK);
     qg_draw_text(text, rec.x+5, rec.y+8, 20, QG_BLACK);
     qg_draw_text("Type something on the grey box!", 10, 10, 50, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

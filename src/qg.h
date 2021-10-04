@@ -212,7 +212,7 @@ QGAPI void qg_init_window(int width, int height, char *title);
 QGAPI void qg_close_window(void);
 QGAPI bool qg_window_is_open(void);
 QGAPI void qg_begin_drawing(void);
-QGAPI void qg_stop_drawing(void);
+QGAPI void qg_end_drawing(void);
 QGAPI void qg_clear(QGColor c);
 QGAPI void qg_set_exit_key(int key);
 QGAPI int qg_random_int(int min, int max);

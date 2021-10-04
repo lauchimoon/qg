@@ -30,7 +30,7 @@ int main() {
     qg_draw_rectangle(r1.x, r1.y, r1.width, r1.height, rec_color);
     qg_draw_text(text, 10, 10, 20, QG_BLACK);
     qg_draw_text(qg_text_format("X: %f/Y: %f", r1.x, r1.y), 10, 35, 20, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

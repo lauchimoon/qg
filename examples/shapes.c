@@ -24,7 +24,7 @@ int main()
 
     qg_draw_circle(650, 300, 50.0, QG_RED);
     
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

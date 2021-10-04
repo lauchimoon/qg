@@ -27,7 +27,7 @@ int main()
     qg_draw_text_ex(f, "And here is a custom font!", 10, 120, 20, QG_BLACK);
     qg_draw_text(qg_text_format("When the number reaches 100, it resets: %d", val), 10, 160, 25, QG_BLACK);
     qg_draw_text_ex(f, "Press S to take a screenshot!", 15, 300, 30, QG_RED);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

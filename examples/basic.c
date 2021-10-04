@@ -9,7 +9,7 @@ int main()
     qg_begin_drawing();
     qg_clear(QG_WHITE);
     qg_draw_text("Hello from qg!", 10, 10, 30, QG_BLACK);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qg_close_window();

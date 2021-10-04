@@ -45,7 +45,7 @@ int main() {
     qg_clear(QG_BLACK);
     qgame_tilemap_draw_ex(tm, 0, 0, w, h);
     qgame_tilemap_draw_grid(tm, QG_WHITE);
-    qg_stop_drawing();
+    qg_end_drawing();
   }
 
   qgame_tileset_free(ts);
