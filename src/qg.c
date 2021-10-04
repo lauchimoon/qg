@@ -117,7 +117,7 @@ void qg_init_window(int width, int height, char *title)
 }
 
 /* Free OpenGL window and close context */
-void qg_close_window()
+void qg_close_window(void)
 {
   glfonsDelete(qg_data.fs);
 
@@ -130,12 +130,12 @@ void qg_close_window()
 }
 
 /* Repeat until exit_key is pressed */
-bool qg_window_is_open()
+bool qg_window_is_open(void)
 {
   return !glfwWindowShouldClose(qg_data.handle);
 }
 
-void qg_begin_drawing()
+void qg_begin_drawing(void)
 {
   qg_data.time_current = glfwGetTime();
   qg_data.time_update = qg_data.time_current - qg_data.time_previous;
@@ -146,7 +146,7 @@ void qg_begin_drawing()
 }
 
 /* Swap buffers */
-void qg_stop_drawing()
+void qg_stop_drawing(void)
 {
   glfwSwapBuffers(qg_data.handle);
   glfwPollEvents();
@@ -231,7 +231,7 @@ void qg_take_screenshot(char *filename)
 #endif
 }
 
-QGV2D qg_get_mouse_pos()
+QGV2D qg_get_mouse_pos(void)
 {
   double xpos, ypos;
   glfwGetCursorPos(qg_data.handle, &xpos, &ypos);
@@ -240,22 +240,22 @@ QGV2D qg_get_mouse_pos()
   return mouse;
 }
 
-int qg_screen_width()
+int qg_screen_width(void)
 {
   return qg_data.window_width;
 }
 
-int qg_screen_height()
+int qg_screen_height(void)
 {
   return qg_data.window_height;
 }
 
-void qg_show_cursor()
+void qg_show_cursor(void)
 {
   glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
-void qg_hide_cursor()
+void qg_hide_cursor(void)
 {
   glfwSetInputMode(qg_data.handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 }
@@ -313,7 +313,7 @@ bool qg_is_mouse_down(int button)
   }
 }
 
-int qg_get_char_pressed()
+int qg_get_char_pressed(void)
 {
   int value = 0;
 
@@ -748,3 +748,4 @@ QGTexture load_texture_from_img(Image img)
 
   return t; 
 }
+

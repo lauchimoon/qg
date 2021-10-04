@@ -209,25 +209,25 @@ extern "C" {
 /* Core functions */
 
 QGAPI void qg_init_window(int width, int height, char *title);
-QGAPI void qg_close_window();
-QGAPI bool qg_window_is_open();
-QGAPI void qg_begin_drawing();
-QGAPI void qg_stop_drawing();
+QGAPI void qg_close_window(void);
+QGAPI bool qg_window_is_open(void);
+QGAPI void qg_begin_drawing(void);
+QGAPI void qg_stop_drawing(void);
 QGAPI void qg_clear(QGColor c);
 QGAPI void qg_set_exit_key(int key);
 QGAPI int qg_random_int(int min, int max);
 QGAPI void qg_take_screenshot(char *filename);
-QGAPI QGV2D qg_get_mouse_pos();
-QGAPI int qg_screen_width();
-QGAPI int qg_screen_height();
-QGAPI void qg_show_cursor();
-QGAPI void qg_hide_cursor();
+QGAPI QGV2D qg_get_mouse_pos(void);
+QGAPI int qg_screen_width(void);
+QGAPI int qg_screen_height(void);
+QGAPI void qg_show_cursor(void);
+QGAPI void qg_hide_cursor(void);
 
 QGAPI bool qg_is_key_pressed(int key);
 QGAPI bool qg_is_key_down(int key);
 QGAPI bool qg_is_mouse_pressed(int button);
 QGAPI bool qg_is_mouse_down(int button);
-QGAPI int qg_get_char_pressed();
+QGAPI int qg_get_char_pressed(void);
 
 /* Shapes */
 
@@ -244,8 +244,8 @@ QGAPI bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2);
 /* Time */
 
 QGAPI void qg_set_fps(int fps);
-QGAPI float qg_get_fps();
-QGAPI float qg_get_delta();
+QGAPI float qg_get_fps(void);
+QGAPI float qg_get_delta(void);
 
 /* Textures */
 
