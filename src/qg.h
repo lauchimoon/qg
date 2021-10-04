@@ -27,7 +27,7 @@
 typedef struct {
   float x;
   float y;
-} QGV2D;
+} QGVec2;
 
 typedef struct {
   float x;
@@ -217,7 +217,7 @@ QGAPI void qg_clear(QGColor c);
 QGAPI void qg_set_exit_key(int key);
 QGAPI int qg_random_int(int min, int max);
 QGAPI void qg_take_screenshot(char *filename);
-QGAPI QGV2D qg_get_mouse_pos(void);
+QGAPI QGVec2 qg_get_mouse_pos(void);
 QGAPI int qg_screen_width(void);
 QGAPI int qg_screen_height(void);
 QGAPI void qg_show_cursor(void);
@@ -237,8 +237,8 @@ QGAPI void qg_draw_rectangle(int x, int y, int w, int h, QGColor c);
 QGAPI void qg_draw_rectangle_rec(QGRectangle rec, QGColor c);
 QGAPI void qg_draw_rectangle_lines(QGRectangle rec, QGColor c);
 QGAPI void qg_draw_circle(int cx, int cy, float r, QGColor c);
-QGAPI void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c);
-QGAPI bool qg_point_vs_rec(QGV2D point, QGRectangle rec);
+QGAPI void qg_draw_triangle(QGVec2 v1, QGVec2 v2, QGVec2 v3, QGColor c);
+QGAPI bool qg_point_vs_rec(QGVec2 point, QGRectangle rec);
 QGAPI bool qg_rec_vs_rec(QGRectangle rec1, QGRectangle rec2);
 
 /* Time */
@@ -253,8 +253,8 @@ QGAPI QGTexture qg_load_texture(char *path);
 QGAPI QGTexture qg_load_texture_from_header(char *filetype, unsigned char *data, unsigned int data_size);
 QGAPI void qg_free_texture(QGTexture t);
 QGAPI void qg_draw_texture(QGTexture t, int x, int y, QGColor tint);
-QGAPI void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor tint);
-QGAPI void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGV2D pos, QGColor tint);
+QGAPI void qg_draw_texture_ex(QGTexture t, QGVec2 pos, float scale, float rot, QGColor tint);
+QGAPI void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGVec2 pos, QGColor tint);
 
 /* Text */
 

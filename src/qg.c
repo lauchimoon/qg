@@ -231,12 +231,12 @@ void qg_take_screenshot(char *filename)
 #endif
 }
 
-QGV2D qg_get_mouse_pos(void)
+QGVec2 qg_get_mouse_pos(void)
 {
   double xpos, ypos;
   glfwGetCursorPos(qg_data.handle, &xpos, &ypos);
 
-  QGV2D mouse = { (float)xpos, (float)ypos };
+  QGVec2 mouse = { (float)xpos, (float)ypos };
   return mouse;
 }
 
@@ -400,7 +400,7 @@ void qg_draw_circle(int cx, int cy, float r, QGColor c)
 }
 
 /* Draw a filled triangle */
-void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c)
+void qg_draw_triangle(QGVec2 v1, QGVec2 v2, QGVec2 v3, QGColor c)
 {
   glBegin(GL_TRIANGLES);
     glColor4ub(c.r, c.g, c.b, c.a);
@@ -410,7 +410,7 @@ void qg_draw_triangle(QGV2D v1, QGV2D v2, QGV2D v3, QGColor c)
   glEnd();
 }
 
-bool qg_point_vs_rec(QGV2D point, QGRectangle rec)
+bool qg_point_vs_rec(QGVec2 point, QGRectangle rec)
 {
   bool res = false;
 
@@ -516,10 +516,10 @@ void qg_free_texture(QGTexture t)
 
 void qg_draw_texture(QGTexture t, int x, int y, QGColor tint)
 {
-  qg_draw_texture_ex(t, (QGV2D){ x, y }, 1.0, 0.0, tint);
+  qg_draw_texture_ex(t, (QGVec2){ x, y }, 1.0, 0.0, tint);
 }
 
-void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor tint)
+void qg_draw_texture_ex(QGTexture t, QGVec2 pos, float scale, float rot, QGColor tint)
 {
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, t.id);
@@ -542,7 +542,7 @@ void qg_draw_texture_ex(QGTexture t, QGV2D pos, float scale, float rot, QGColor 
   glDisable(GL_TEXTURE_2D);
 }
 
-void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGV2D pos, QGColor tint)
+void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGVec2 pos, QGColor tint)
 {
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, t.id);
