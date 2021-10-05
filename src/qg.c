@@ -571,6 +571,21 @@ void qg_draw_texture_part(QGTexture t, QGRectangle rec, QGVec2 pos, QGColor tint
   glDisable(GL_TEXTURE_2D);
 }
 
+void qg_set_texture_filter(QGTexture t, int filter)
+{
+  switch (filter) {
+  case QGTEXTURE_FILTER_POINT:
+    glTexParameteri(t.id, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(t.id, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    break;
+  case QGTEXTURE_FILTER_BILINEAR:
+    glTexParameteri(t.id, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    break;
+  default:
+    break;
+  }
+}
+
 
 
 QGFont qg_load_font(char *path)
