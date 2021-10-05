@@ -189,6 +189,11 @@ void qg_set_exit_key(int key)
   qg_data.exit_key = key;
 }
 
+void qg_set_title(char *title)
+{
+  glfwSetWindowTitle(qg_data.handle, title);
+}
+
 int qg_random_int(int min, int max)
 {
   if (min > max) {

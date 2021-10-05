@@ -229,6 +229,7 @@ QGAPI void qg_begin_drawing(void);
 QGAPI void qg_end_drawing(void);
 QGAPI void qg_clear(QGColor c);
 QGAPI void qg_set_exit_key(int key);
+QGAPI void qg_set_title(char *title);
 QGAPI int qg_random_int(int min, int max);
 QGAPI void qg_take_screenshot(char *filename);
 QGAPI QGVec2 qg_get_mouse_pos(void);
