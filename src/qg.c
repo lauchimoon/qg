@@ -1,16 +1,14 @@
 #include "qg.h"
 
-/* Standard includes */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 
-/* Non-standard includes */
 #include "external/glfw/include/GLFW/glfw3.h"
 
 #if defined(_WIN32)
-  void __stdcall Sleep(unsigned long msTimeout);  /* Include Sleep() function signature here to avoid including windows.h */
+  void __stdcall Sleep(unsigned long msTimeout);  // Include Sleep() function signature here to avoid including windows.h
 #endif
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -74,7 +72,6 @@ QGTexture load_texture_from_img(Image img);
 
 static Data qg_data = { 0 };
 
-/* Create OpenGL context */
 void qg_init_window(int width, int height, char *title)
 {
   glfwSetErrorCallback(error_callback);
@@ -102,12 +99,12 @@ void qg_init_window(int width, int height, char *title)
   glfwMakeContextCurrent(qg_data.handle);
   glfwSetKeyCallback(qg_data.handle, key_callback);
   glfwSetCharCallback(qg_data.handle, char_callback);
-  glfwSwapInterval(0);  /* Disables vsync */
+  glfwSwapInterval(0);  // Disables vsync
   qg_data.exit_key = GLFW_KEY_ESCAPE;
 
   init_device(qg_data.window_width, qg_data.window_height);
 
-  srand(time(NULL));  /* Seed random number generator */
+  srand(time(NULL));  // Seed random number generator
   qg_data.time_previous = glfwGetTime();
 
 #if !defined(QG_NO_LOG)
@@ -116,7 +113,6 @@ void qg_init_window(int width, int height, char *title)
 #endif
 }
 
-/* Free OpenGL window and close context */
 void qg_close_window(void)
 {
   glfonsDelete(qg_data.fs);
@@ -129,7 +125,6 @@ void qg_close_window(void)
 #endif
 }
 
-/* Repeat until exit_key is pressed */
 bool qg_window_is_open(void)
 {
   return !glfwWindowShouldClose(qg_data.handle);
@@ -145,7 +140,6 @@ void qg_begin_drawing(void)
   glLoadIdentity();
 }
 
-/* Swap buffers */
 void qg_end_drawing(void)
 {
   glfwSwapBuffers(qg_data.handle);
@@ -160,7 +154,7 @@ void qg_end_drawing(void)
 
   double extra_time = 0;
 
-  /* Wait for some time */
+  // Wait for some time
   while (qg_data.time_frame < qg_data.time_target) {
     wait((float)(qg_data.time_target - qg_data.time_frame)*1000.0);
 
@@ -172,10 +166,9 @@ void qg_end_drawing(void)
   }
 }
 
-/* Clear the background's color */
 void qg_clear(QGColor c)
 {
-  /* Transforming values from 0-1 to 0-255 */
+  // Transforming values from 0-1 to 0-255
   float r = (float)c.r / 255;
   float g = (float)c.g / 255;
   float b = (float)c.b / 255;
@@ -204,7 +197,7 @@ int qg_random_int(int min, int max)
   return (rand()%(abs(max-min)+1) + min);
 }
 
-/* Note: no extension (.png) required in argument filename */
+// Note: no extension (.png) required in argument filename
 void qg_take_screenshot(char *filename)
 {
   char buffer[20];
@@ -331,7 +324,7 @@ int qg_get_char_pressed(void)
       qg_data.char_pressed_queue[i] = qg_data.char_pressed_queue[i + 1];
     }
 
-    // Reset last character in queue
+    // Reset last character in queue 
     qg_data.char_pressed_queue[qg_data.char_pressed_queue_count] = 0;
     qg_data.char_pressed_queue_count--;
   }
@@ -341,7 +334,6 @@ int qg_get_char_pressed(void)
 
 
 
-/* Draw a pixel */
 void qg_draw_point(int x, int y, QGColor c)
 {
   glBegin(GL_POINTS);
@@ -350,7 +342,6 @@ void qg_draw_point(int x, int y, QGColor c)
   glEnd();
 }
 
-/* Draw a line */
 void qg_draw_line(int sx, int sy, int ex, int ey, QGColor c)
 {
   glBegin(GL_LINES);
@@ -360,7 +351,6 @@ void qg_draw_line(int sx, int sy, int ex, int ey, QGColor c)
   glEnd();
 }
 
-/* Draw a filled rectangle */
 void qg_draw_rectangle(int x, int y, int w, int h, QGColor c)
 {
   glBegin(GL_QUADS);
@@ -388,7 +378,6 @@ void qg_draw_rectangle_lines(QGRectangle rec, QGColor c)
   glEnd();
 }
 
-/* Draw a filled circle */
 void qg_draw_circle(int cx, int cy, float r, QGColor c)
 {
   if (r <= 0) {
@@ -404,7 +393,6 @@ void qg_draw_circle(int cx, int cy, float r, QGColor c)
   glEnd();
 }
 
-/* Draw a filled triangle */
 void qg_draw_triangle(QGVec2 v1, QGVec2 v2, QGVec2 v3, QGColor c)
 {
   glBegin(GL_TRIANGLES);
@@ -485,7 +473,6 @@ QGTexture qg_load_texture(char *path)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-  /* Free the loaded data */
   stbi_image_free(data);
 
   t.id = id;
@@ -611,7 +598,6 @@ void qg_draw_text(char *text, int x, int y, int font_size, QGColor c)
   qg_draw_text_ex(qg_data.default_font, text, x, y, font_size, c);
 }
 
-/* If a font was loaded, the user may use it in this function */
 void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColor c)
 {
   unsigned int color = glfonsRGBA(c.r, c.g, c.b, c.a);
@@ -652,13 +638,12 @@ void qg_draw_fps(int x, int y, QGColor c)
 
 
 
-/* Redirect errors to here */
+// Redirect errors here
 static void error_callback(int error, const char *description)
 {
   printf(description);
 }
 
-/* Specific keyboard events */
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
   if (action == GLFW_PRESS && key == qg_data.exit_key) {
@@ -675,7 +660,6 @@ static void char_callback(GLFWwindow *window, unsigned int key)
   }
 }
 
-/* OpenGL setup */
 static void init_device(int width, int height)
 {
   glfwGetFramebufferSize(qg_data.handle, &width, &height);
@@ -684,7 +668,7 @@ static void init_device(int width, int height)
   glClear(GL_COLOR_BUFFER_BIT);
   glClearColor(0.0, 0.0, 0.0, 1.0);
 
-  glEnable(GL_BLEND);   /* Enable color blending */
+  glEnable(GL_BLEND);   // Enable color blending
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   qg_data.fs = glfonsCreate(512, 512, FONS_ZERO_TOPLEFT);
