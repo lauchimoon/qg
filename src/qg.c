@@ -36,7 +36,7 @@ typedef struct {
   GLFWwindow *handle;
   int window_width;
   int window_height;
-  char *window_title;
+  const char *window_title;
 
   int exit_key;
 
@@ -66,14 +66,14 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 static void char_callback(GLFWwindow *window, unsigned int key);
 static void init_device(int width, int height);
 static void wait(float ms);
-static void write_png(char *filename, unsigned char *img_data, int width, int height);
-static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size);
+static void write_png(const char *filename, unsigned char *img_data, int width, int height);
+static Image load_img_from_memory(const char *filetype, unsigned char *data, unsigned int data_size);
 static void free_img(Image img);
 QGTexture load_texture_from_img(Image img);
 
 static Data qg_data = { 0 };
 
-void qg_init_window(int width, int height, char *title)
+void qg_init_window(int width, int height, const char *title)
 {
   glfwSetErrorCallback(error_callback);
   if (!glfwInit()) {
@@ -183,7 +183,7 @@ void qg_set_exit_key(int key)
   qg_data.exit_key = key;
 }
 
-void qg_set_title(char *title)
+void qg_set_title(const char *title)
 {
   glfwSetWindowTitle(qg_data.handle, title);
 }
@@ -199,7 +199,7 @@ int qg_random_int(int min, int max)
 }
 
 // Note: no extension (.png) required in argument filename
-void qg_take_screenshot(char *filename)
+void qg_take_screenshot(const char *filename)
 {
   char buffer[20];
   int fb_w, fb_h;
@@ -450,7 +450,7 @@ float qg_get_delta()
 
 
 
-QGTexture qg_load_texture(char *path)
+QGTexture qg_load_texture(const char *path)
 {
   QGTexture t;
 
@@ -486,7 +486,7 @@ QGTexture qg_load_texture(char *path)
   return t;
 }
 
-QGTexture qg_load_texture_from_header(char *filetype, unsigned char *data, unsigned int data_size)
+QGTexture qg_load_texture_from_header(const char *filetype, unsigned char *data, unsigned int data_size)
 {
   QGTexture t = { 0 };
   Image dummy = load_img_from_memory(filetype, data, data_size);
@@ -581,7 +581,7 @@ void qg_set_texture_filter(QGTexture t, int filter)
 
 
 
-QGFont qg_load_font(char *path)
+QGFont qg_load_font(const char *path)
 {
   QGFont fn = fonsAddFont(qg_data.fs, "font", path);
 
@@ -594,12 +594,12 @@ QGFont qg_load_font(char *path)
   return fn;
 }
 
-void qg_draw_text(char *text, int x, int y, int font_size, QGColor c)
+void qg_draw_text(const char *text, int x, int y, int font_size, QGColor c)
 {
   qg_draw_text_ex(qg_data.default_font, text, x, y, font_size, c);
 }
 
-void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColor c)
+void qg_draw_text_ex(QGFont fnt, const char *text, int x, int y, int font_size, QGColor c)
 {
   unsigned int color = glfonsRGBA(c.r, c.g, c.b, c.a);
 
@@ -611,7 +611,7 @@ void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColo
   fonsDrawText(qg_data.fs, (float)x, (float)y+font_size-6, text, NULL);
 }
 
-char *qg_text_format(char *text, ...)
+char *qg_text_format(const char *text, ...)
 {
   char buffers[MAX_BUFFERS][BUFFER_LEN] = { 0 };
   int index = 0;
@@ -699,12 +699,12 @@ static void wait(float ms)
 #endif
 }
 
-static void write_png(char *filename, unsigned char *img_data, int width, int height)
+static void write_png(const char *filename, unsigned char *img_data, int width, int height)
 {
   stbi_write_png(filename, width, height, 4, img_data, width*4);
 }
 
-static Image load_img_from_memory(char *filetype, unsigned char *data, unsigned int data_size)
+static Image load_img_from_memory(const char *filetype, unsigned char *data, unsigned int data_size)
 {
   Image image = { 0 };
 

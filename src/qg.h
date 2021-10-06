@@ -222,16 +222,16 @@ extern "C" {
 #endif
 /* Core functions */
 
-QGAPI void qg_init_window(int width, int height, char *title);
+QGAPI void qg_init_window(int width, int height, const char *title);
 QGAPI void qg_close_window(void);
 QGAPI bool qg_window_is_open(void);
 QGAPI void qg_begin_drawing(void);
 QGAPI void qg_end_drawing(void);
 QGAPI void qg_clear(QGColor c);
 QGAPI void qg_set_exit_key(int key);
-QGAPI void qg_set_title(char *title);
+QGAPI void qg_set_title(const char *title);
 QGAPI int qg_random_int(int min, int max);
-QGAPI void qg_take_screenshot(char *filename);
+QGAPI void qg_take_screenshot(const char *filename);
 QGAPI QGVec2 qg_get_mouse_pos(void);
 QGAPI int qg_screen_width(void);
 QGAPI int qg_screen_height(void);
@@ -264,8 +264,8 @@ QGAPI float qg_get_delta(void);
 
 /* Textures */
 
-QGAPI QGTexture qg_load_texture(char *path);
-QGAPI QGTexture qg_load_texture_from_header(char *filetype, unsigned char *data, unsigned int data_size);
+QGAPI QGTexture qg_load_texture(const char *path);
+QGAPI QGTexture qg_load_texture_from_header(const char *filetype, unsigned char *data, unsigned int data_size);
 QGAPI void qg_free_texture(QGTexture t);
 QGAPI void qg_draw_texture(QGTexture t, int x, int y, QGColor tint);
 QGAPI void qg_draw_texture_ex(QGTexture t, QGVec2 pos, float scale, float rot, QGColor tint);
@@ -274,10 +274,10 @@ QGAPI void qg_set_texture_filter(QGTexture t, int filter);
 
 /* Text */
 
-QGAPI QGFont qg_load_font(char *path);
-QGAPI void qg_draw_text(char *text, int x, int y, int font_size, QGColor c);
-QGAPI void qg_draw_text_ex(QGFont fnt, char *text, int x, int y, int font_size, QGColor c);
-QGAPI char *qg_text_format(char *text, ...);
+QGAPI QGFont qg_load_font(const char *path);
+QGAPI void qg_draw_text(const char *text, int x, int y, int font_size, QGColor c);
+QGAPI void qg_draw_text_ex(QGFont fnt, const char *text, int x, int y, int font_size, QGColor c);
+QGAPI char *qg_text_format(const char *text, ...);
 QGAPI void qg_draw_fps(int x, int y, QGColor c);
 
 #if defined(__cplusplus)
