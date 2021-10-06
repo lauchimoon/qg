@@ -109,7 +109,7 @@ void qg_init_window(int width, int height, const char *title)
   qg_data.time_previous = glfwGetTime();
 
 #if !defined(QG_NO_LOG)
-  printf("[INFO]: Starting QG v%.1f\n", QG_VERSION);
+  printf("[INFO]: Starting QG v%s\n", QG_VERSION);
   printf("[INFO]: Window size of %dx%d\n", qg_data.window_width, qg_data.window_height);
 #endif
 }
