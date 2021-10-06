@@ -17,6 +17,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "external/stb_image.h"
 
+// TODO: remove fontstash dependency. Replace by raw stb_truetype
 #define FONTSTASH_IMPLEMENTATION
 #include "external/fontstash.h"
 
