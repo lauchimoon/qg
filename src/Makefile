@@ -3,6 +3,7 @@
 CC ?= gcc
 OBJS = qg.o \
 	   qglfw.o
+CFLAGS = -Wall
 ROOT = $(shell whoami)
 
 default: qg
@@ -11,10 +12,10 @@ qg: $(OBJS)
 	ar rcs libqg.a $(OBJS)
 
 gq.o: qg.c
-	$(CC) -c qg.c
+	$(CC) -c $(CFLAGS) qg.c
 
 qglfw.o: qglfw.c
-	$(CC) -c qglfw.c
+	$(CC) -c $(CFLAGS) qglfw.c
 
 clean:
 ifeq ($(OS), Windows_NT)
