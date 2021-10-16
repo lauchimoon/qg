@@ -1,11 +1,6 @@
 .PHONY: all, clean, install
 
-# On Windows the CC variable may throw the following error:
-# process_begin: CreateProcess(NULL, cc, ...) failed.
-# Please, when compiling make sure to specify your compiler.
-# It can be gcc, it can be tcc, anything.
-# mingw32-make.exe CC=gcc
-CC ?= gcc
+CC = gcc
 OBJS = qg.o \
 	   qglfw.o
 CFLAGS = -Wall
