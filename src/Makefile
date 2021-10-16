@@ -11,8 +11,8 @@ default: qg
 qg: $(OBJS)
 	ar rcs libqg.a $(OBJS)
 
-gq.o: qg.c
-	$(CC) -c $(CFLAGS) qg.c
+qg.o: qg.c
+	$(CC) $(CFLAGS) -c qg.c
 
 qglfw.o: qglfw.c
 	$(CC) -c $(CFLAGS) qglfw.c
