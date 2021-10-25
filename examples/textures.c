@@ -2,7 +2,7 @@
 
 int main()
 {
-  qg_init_window(800, 800, "[qg] textures");
+  qg_init_window(800, 800, "[qg] textures", false);
   QGTexture t = qg_load_texture("logo.png");
 
   while (qg_window_is_open()) {

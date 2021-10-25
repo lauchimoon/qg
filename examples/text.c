@@ -4,7 +4,7 @@
 
 int main()
 {
-  qg_init_window(800, 800, "[qg] text");
+  qg_init_window(800, 800, "[qg] text", false);
   qg_set_fps(60);
   QGColor c = { 128, 255, 128, 255 };
   QGFont f = qg_load_font("font.ttf");

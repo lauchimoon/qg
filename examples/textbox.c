@@ -3,8 +3,9 @@
 
 #define MAX_INPUT_CHARS   16
 
-int main() {
-  qg_init_window(800, 450, "[qg] textbox");
+int main()
+{
+  qg_init_window(800, 450, "[qg] textbox", false);
   qg_set_fps(60);
 
   char text[MAX_INPUT_CHARS+1] = "\0";

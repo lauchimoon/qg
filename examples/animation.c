@@ -2,7 +2,7 @@
 
 int main()
 {
-  qg_init_window(800, 800, "[qg] animation");
+  qg_init_window(800, 800, "[qg] animation", false);
   qg_set_fps(60);
   QGTexture t = qg_load_texture("player.png");
   QGRectangle r = { 0, 0, 96, 96 };   /* This is the texture's rectangle */

@@ -73,7 +73,7 @@ QGTexture load_texture_from_img(Image img);
 
 static Data qg_data = { 0 };
 
-void qg_init_window(int width, int height, const char *title)
+void qg_init_window(int width, int height, const char *title, bool resize)
 {
   glfwSetErrorCallback(error_callback);
   if (!glfwInit()) {
@@ -82,7 +82,7 @@ void qg_init_window(int width, int height, const char *title)
 #endif
   }
 
-  glfwWindowHint(GLFW_RESIZABLE, 0);
+  glfwWindowHint(GLFW_RESIZABLE, resize);
 
   qg_data.handle = glfwCreateWindow(width, height, title, NULL, NULL);
 

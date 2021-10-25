@@ -65,7 +65,7 @@ int main()
 {
   w = MAP_WIDTH*TILE_SIZE;
   h = MAP_HEIGHT*TILE_SIZE;
-  qg_init_window(w, h, "maze - qgame");
+  qg_init_window(w, h, "maze - qgame", false);
   qg_set_fps(60);
   init_resources();
   init_screen(current_screen);

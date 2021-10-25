@@ -2,7 +2,7 @@
 
 int main()
 {
-  qg_init_window(800, 800, "[qg] basic");
+  qg_init_window(800, 800, "[qg] basic", false);
   qg_set_fps(60);
 
   while (qg_window_is_open()) {

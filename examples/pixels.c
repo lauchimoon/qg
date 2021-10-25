@@ -2,7 +2,7 @@
 
 int main()
 {
-  qg_init_window(800, 800, "[qg] pixels");
+  qg_init_window(800, 800, "[qg] pixels", false);
 
   while (qg_window_is_open()) {
     qg_begin_drawing();

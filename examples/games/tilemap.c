@@ -29,7 +29,7 @@ int main() {
   QGameTileset *ts;
   QGameTilemap *tm;
   
-  qg_init_window(w, h, "[qgame] tilemap");
+  qg_init_window(w, h, "[qgame] tilemap", false);
   qg_set_fps(60);
 
   ts = qgame_tileset_new("tileset.png", TILE_SIZE, TILE_SIZE);

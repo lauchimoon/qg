@@ -222,7 +222,7 @@ extern "C" {
 #endif
 /* Core functions */
 
-QGAPI void qg_init_window(int width, int height, const char *title);
+QGAPI void qg_init_window(int width, int height, const char *title, bool resize);
 QGAPI void qg_close_window(void);
 QGAPI bool qg_window_is_open(void);
 QGAPI void qg_begin_drawing(void);

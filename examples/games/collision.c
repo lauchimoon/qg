@@ -2,7 +2,7 @@
 #include "../../extensions/qgame.h"
 
 int main() {
-  qg_init_window(800, 800, "[qgame] collisions");
+  qg_init_window(800, 800, "[qgame] collisions", false);
   qg_set_fps(60);
   QGRectangle r1 = { 50, 50, 64, 64 };
   QGRectangle r2 = { 450, 450, 128, 64 };
