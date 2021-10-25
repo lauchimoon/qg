@@ -4,6 +4,7 @@ CC = gcc
 OBJS = qg.o \
 	   qglfw.o
 CFLAGS = -Wall
+QG_LOG = -DQG_NO_LOG
 ROOT = $(shell whoami)
 
 default: qg
@@ -12,7 +13,7 @@ qg: $(OBJS)
 	ar rcs libqg.a $(OBJS)
 
 qg.o: qg.c
-	$(CC) $(CFLAGS) -c qg.c
+	$(CC) $(CFLAGS) $(QG_LOG) -c qg.c
 
 qglfw.o: qglfw.c
 	$(CC) -c $(CFLAGS) qglfw.c
