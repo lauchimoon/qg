@@ -1,4 +1,5 @@
 # Quick Graphics
+Unfortunately, this project is now abandoned. I will consider making a better library.
 
 ## Features
 - CROSS-PLATFORM! qg is available for Windows and Linux.
